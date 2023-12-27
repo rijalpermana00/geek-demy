@@ -1,0 +1,45 @@
+const STR_SUB_TOTAL = 'SUB_TOTAL';
+const STR_COUPON_DISCOUNT = 'COUPON_DISCOUNT';
+const STR_TOTAL_PRO_DISCOUNT = 'TOTAL_PRO_DISCOUNT';
+const STR_PRO_MEMBERSHIP_FEE = 'PRO_MEMBERSHIP_FEE';
+const STR_ENROLLMENT_FEE = 'ENROLLMENT_FEE';
+const STR_TOTAL = 'TOTAL';
+
+class Bill{
+    
+    constructor(main){
+        this.main = main
+    }
+    
+    print(){
+        console.log(`${STR_SUB_TOTAL} ${this.countSubtotal()}`);
+        console.log(`${STR_COUPON_DISCOUNT} ${this.main.cart.appliedCoupon} ${this.countCouponDiscount()}`);
+        console.log(`${STR_TOTAL_PRO_DISCOUNT} ${(this.main.membership.proDiscount).toFixed(2)}`);
+        console.log(`${STR_PRO_MEMBERSHIP_FEE} ${(this.main.membership.proMembership === true ? this.main.membership.fee : 0).toFixed(2)}`);
+        console.log(`${STR_ENROLLMENT_FEE} ${(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : 0).toFixed(2)}`);
+        console.log(`${STR_TOTAL} ${this.countTotal()}`);
+    }
+    
+    countTotal(){
+        return (
+            this.main.cart.subtotal
+            -this.main.cart.couponDiscount
+            +(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : 0)
+        ).toFixed(2);
+    }
+    
+    countSubtotal(){
+        this.subtotal = this.main.cart.subtotal
+        
+        return this.subtotal.toFixed(2)
+    }
+    
+    countCouponDiscount(){
+        const coupon = this.main.cart.appliedCoupon;
+        this.main.coupon.discount(coupon);
+        
+        return (this.main.cart.couponDiscount).toFixed(2)
+    }
+}
+
+module.exports = Bill;
