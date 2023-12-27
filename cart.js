@@ -1,14 +1,15 @@
 const Programme = require("./programme");
 const ENROLLMENT_FEE = 500;
 const ENROLLMENT_FEE_MINIMUM_VALUE = 6666;
+const STR_ZERO = 0;
 
 class Cart{
     constructor(){
         this.items = []
         this.subtotal = 0.00
-        this.appliedCoupon = ''
+        this.appliedCoupon = 'NONE'
         this.lowestPrice = 0
-        this.couponDiscount = 0
+        this.couponDiscount = 0.00
         this.enrollmentFeePrice = ENROLLMENT_FEE
         this.enrollmentFee = true
         this.programme = new Programme()
@@ -34,7 +35,7 @@ class Cart{
     }
     
     checkLowestPrice(price){
-        this.lowestPrice = this.lowestPrice <= price && this.lowestPrice > 0 ? this.lowestPrice : price;
+        this.lowestPrice = this.lowestPrice <= price && this.lowestPrice > STR_ZERO ? this.lowestPrice : price;
     }
     
     listItems(){
@@ -43,7 +44,7 @@ class Cart{
     
     countItem(){
         const listItem = this.listItems()
-        let counter = 0;
+        let counter = STR_ZERO;
         listItem.forEach(item => {
             counter += parseInt(item.amount);
         });

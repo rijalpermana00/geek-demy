@@ -2,6 +2,19 @@ const fs = require('fs');
 const assert = require('assert');
 const Geekdemy = require('../main');
 const { captureConsoleLog } = require('./test-utils');
+const SUB_TOTAL_VALUE_1 = 13000.00;
+const COUPON_DISCOUNT_VALUE_1 = "B4G1 2500.00";
+const TOTAL_PRO_DISCOUNT_VALUE_1 = 0.00;
+const PRO_MEMBERSHIP_FEE_VALUE_1 = 0.00;
+const ENROLLMENT_FEE_VALUE_1 = 0.00;
+const TOTAL_VALUE_1 = 10500.00;
+
+const SUB_TOTAL_VALUE_2 = 10000.00;
+const COUPON_DISCOUNT_VALUE_2 = "DEAL_G20 2000.00";
+const TOTAL_PRO_DISCOUNT_VALUE_2 = 0.00;
+const PRO_MEMBERSHIP_FEE_VALUE_2 = 0.00;
+const ENROLLMENT_FEE_VALUE_2 = 0.00;
+const TOTAL_VALUE_2 = 8000.00;
 
 
 describe('Geekdemy Test', () => {
@@ -30,21 +43,21 @@ describe('Geekdemy Test', () => {
 
   // Test 1
   testGeekdemyData('input1.txt', [
-    "SUB_TOTAL 13000.00",
-    "COUPON_DISCOUNT B4G1 2500.00",
-    "TOTAL_PRO_DISCOUNT 0.00",
-    "PRO_MEMBERSHIP_FEE 0.00",
-    "ENROLLMENT_FEE 0.00",
-    "TOTAL 10500.00",
+    `SUB_TOTAL ${SUB_TOTAL_VALUE_1}`,
+    `COUPON_DISCOUNT ${COUPON_DISCOUNT_VALUE_1}`,
+    `TOTAL_PRO_DISCOUNT ${TOTAL_PRO_DISCOUNT_VALUE_1}`,
+    `PRO_MEMBERSHIP_FEE ${PRO_MEMBERSHIP_FEE_VALUE_1}`,
+    `ENROLLMENT_FEE ${ENROLLMENT_FEE_VALUE_1}`,
+    `TOTAL ${TOTAL_VALUE_1}`,
   ]);
 
   // Test 2
   testGeekdemyData('input2.txt', [
-    "SUB_TOTAL 10000.00",
-    "COUPON_DISCOUNT DEAL_G20 2000.00",
-    "TOTAL_PRO_DISCOUNT 0.00",
-    "PRO_MEMBERSHIP_FEE 0.00",
-    "ENROLLMENT_FEE 0.00",
-    "TOTAL 8000.00",
+    `SUB_TOTAL ${SUB_TOTAL_VALUE_2}`,
+    `COUPON_DISCOUNT ${COUPON_DISCOUNT_VALUE_2}`,
+    `TOTAL_PRO_DISCOUNT ${TOTAL_PRO_DISCOUNT_VALUE_2}`,
+    `PRO_MEMBERSHIP_FEE ${PRO_MEMBERSHIP_FEE_VALUE_2}`,
+    `ENROLLMENT_FEE ${ENROLLMENT_FEE_VALUE_2}`,
+    `TOTAL ${TOTAL_VALUE_2}`,
   ]);
 });

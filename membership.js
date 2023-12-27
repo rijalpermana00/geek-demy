@@ -4,6 +4,7 @@ const MEMBERSHIPFEE = 200
 const DIPLOMA_DISCOUNT = 0.01;
 const CERTIFICATION_DISCOUNT = 0.02;
 const DEGREE_DISCOUNT = 0.03;
+const ZERO = 0
 
 class Membership{
     constructor(cart){
@@ -15,7 +16,7 @@ class Membership{
             DEGREE:DEGREE_DISCOUNT
         }
         this.proMembership = false
-        this.proDiscount = 0
+        this.proDiscount = ZERO
         this.programme = new Programme
     }
     
@@ -31,8 +32,11 @@ class Membership{
             const price = this.programme.loadPrice(item.programme)
             const discount = this.discountRate[item.programme]
             let totalDiscount = ((price*item.amount)*discount);
+            let lowestPriceAfterDiscount = price-(price*discount);
+            this.cart.checkLowestPrice(price+totalDiscount);
             this.proDiscount += totalDiscount;
             this.cart.calculate(-totalDiscount)
+            this.cart.checkLowestPrice(lowestPriceAfterDiscount);
         });
     }
 }

@@ -1,10 +1,11 @@
 const fs = require("fs")
 const Main = require("./main");
+const ERROR_CODE = 500
 
 const filename = process.argv[2]
 fs.readFile(filename, "utf8", (err, data) => {
     if (err) throw {
-        code:500,
+        code:ERROR_CODE,
         msg:err.message
     }
     

@@ -4,6 +4,8 @@ const STR_TOTAL_PRO_DISCOUNT = 'TOTAL_PRO_DISCOUNT';
 const STR_PRO_MEMBERSHIP_FEE = 'PRO_MEMBERSHIP_FEE';
 const STR_ENROLLMENT_FEE = 'ENROLLMENT_FEE';
 const STR_TOTAL = 'TOTAL';
+const STR_NONE = 'NONE';
+const STR_ZERO = 0;
 
 class Bill{
     
@@ -13,10 +15,10 @@ class Bill{
     
     print(){
         console.log(`${STR_SUB_TOTAL} ${this.countSubtotal()}`);
-        console.log(`${STR_COUPON_DISCOUNT} ${this.main.cart.appliedCoupon} ${this.countCouponDiscount()}`);
+        console.log(`${STR_COUPON_DISCOUNT} ${(this.main.cart.appliedCoupon)} ${this.countCouponDiscount()}`);
         console.log(`${STR_TOTAL_PRO_DISCOUNT} ${(this.main.membership.proDiscount).toFixed(2)}`);
-        console.log(`${STR_PRO_MEMBERSHIP_FEE} ${(this.main.membership.proMembership === true ? this.main.membership.fee : 0).toFixed(2)}`);
-        console.log(`${STR_ENROLLMENT_FEE} ${(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : 0).toFixed(2)}`);
+        console.log(`${STR_PRO_MEMBERSHIP_FEE} ${(this.main.membership.proMembership === true ? this.main.membership.fee : STR_ZERO).toFixed(2)}`);
+        console.log(`${STR_ENROLLMENT_FEE} ${(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : STR_ZERO).toFixed(2)}`);
         console.log(`${STR_TOTAL} ${this.countTotal()}`);
     }
     
@@ -24,7 +26,7 @@ class Bill{
         return (
             this.main.cart.subtotal
             -this.main.cart.couponDiscount
-            +(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : 0)
+            +(this.main.cart.enrollmentFee === true ? this.main.cart.enrollmentFeePrice : STR_ZERO)
         ).toFixed(2);
     }
     
@@ -36,8 +38,10 @@ class Bill{
     
     countCouponDiscount(){
         const coupon = this.main.cart.appliedCoupon;
+        if(coupon == STR_NONE){
+            return (STR_ZERO).toFixed(2)
+        }
         this.main.coupon.discount(coupon);
-        
         return (this.main.cart.couponDiscount).toFixed(2)
     }
 }
